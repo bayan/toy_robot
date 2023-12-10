@@ -6,3 +6,7 @@ require "toy_robot"
 require "minitest/autorun"
 require "minitest/reporters"
 Minitest::Reporters.use!
+
+class Minitest::Test
+  include ToyRobot
+end
