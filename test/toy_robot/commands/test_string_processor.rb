@@ -36,6 +36,39 @@ class TestStringProcessor < Minitest::Test
     end
   end
 
+  def test_example_command_sequence_2
+    stage = Table.build(0..5, 0..5)
+    robot = Robot.new
+    command_strings = [
+      "PLACE 0,0,NORTH",
+      "MOVE",
+      "REPORT"
+    ]
+    assert_output("0,1,NORTH\n") do
+      command_strings.each do |command_string|
+        Command::StringProcessor.process_command(stage, robot, command_string)
+      end
+    end
+  end
+
+  def test_example_command_sequence_3
+    stage = Table.build(0..5, 0..5)
+    robot = Robot.new
+    command_strings = [
+      "PLACE 1,2,EAST",
+      "MOVE",
+      "MOVE",
+      "LEFT",
+      "MOVE",
+      "REPORT"
+    ]
+    assert_output("3,3,NORTH\n") do
+      command_strings.each do |command_string|
+        Command::StringProcessor.process_command(stage, robot, command_string)
+      end
+    end
+  end
+
   def test_ignore_all_commands_prior_to_initial_placement
     stage = Table.build(0..5, 0..5)
     robot = Robot.new
