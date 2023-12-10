@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'base'
+require_relative "base"
 
 module ToyRobot
   module Command
     class Place < Base
-
       FORMAT = /^PLACE\s+(-?\d+),(-?\d+),(NORTH|SOUTH|EAST|WEST)$/
 
       def self.execute(stage, robot, *arguments)
@@ -16,18 +15,19 @@ module ToyRobot
         end
       end
 
-      private
+      class << self
+        private
 
-      def self.parse_arguments(command_string)
-        args = FORMAT.match(command_string).captures
-        x = args[0].to_i
-        y = args[1].to_i
-        position = Vector[x,y]
-        direction_label = args[2]
-        direction = DIRECTIONS_BY_LABEL[direction_label]
-        [position, direction]
+        def parse_arguments(command_string)
+          args = FORMAT.match(command_string).captures
+          x = args[0].to_i
+          y = args[1].to_i
+          position = Vector[x, y]
+          direction_label = args[2]
+          direction = DIRECTIONS_BY_LABEL[direction_label]
+          [position, direction]
+        end
       end
-
     end
   end
 end

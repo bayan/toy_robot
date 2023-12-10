@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'base'
+require_relative "base"
 
 module ToyRobot
   module Command
     class Left < Base
-      
       FORMAT = /^LEFT$/
 
       def self.execute(stage, robot, *arguments)
@@ -14,7 +13,6 @@ module ToyRobot
           robot.face_direction(direction)
         end
       end
-          
     end
   end
 end

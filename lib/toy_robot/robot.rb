@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require 'matrix'
-require_relative 'table_direction'
+require "matrix"
+require_relative "table_direction"
 
 module ToyRobot
   class Robot
-
     include TableDirection::Constants
 
     attr_reader :position, :direction
@@ -30,6 +29,5 @@ module ToyRobot
     def direction_label
       DIRECTIONS_BY_VECTOR[direction]
     end
-
   end
 end
