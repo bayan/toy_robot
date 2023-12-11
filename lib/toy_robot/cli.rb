@@ -34,6 +34,11 @@ module ToyRobot
     def self.exit_on_failure?
       true
     end
+
+    trap("INT") do
+      puts "\nCtrl-C detected. Exiting gracefully."
+      exit
+    end
   end
 end
 
