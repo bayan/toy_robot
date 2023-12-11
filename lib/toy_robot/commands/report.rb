@@ -9,7 +9,7 @@ module ToyRobot
 
       def self.execute(stage, robot, *arguments)
         if robot.on_table?
-          puts "#{robot.position.to_a.join(",")},#{robot.direction_label}"
+          puts "Output: #{robot.position.to_a.join(",")},#{robot.direction_label}"
         end
       end
     end

@@ -29,7 +29,7 @@ class TestStringProcessor < Minitest::Test
       "MOVE",
       "REPORT"
     ]
-    assert_output("0,1,NORTH\n") do
+    assert_output("Output: 0,1,NORTH\n") do
       command_strings.each do |command_string|
         Command::StringProcessor.process_command(stage, robot, command_string)
       end
@@ -44,7 +44,7 @@ class TestStringProcessor < Minitest::Test
       "MOVE",
       "REPORT"
     ]
-    assert_output("0,1,NORTH\n") do
+    assert_output("Output: 0,1,NORTH\n") do
       command_strings.each do |command_string|
         Command::StringProcessor.process_command(stage, robot, command_string)
       end
@@ -62,7 +62,7 @@ class TestStringProcessor < Minitest::Test
       "MOVE",
       "REPORT"
     ]
-    assert_output("3,3,NORTH\n") do
+    assert_output("Output: 3,3,NORTH\n") do
       command_strings.each do |command_string|
         Command::StringProcessor.process_command(stage, robot, command_string)
       end
