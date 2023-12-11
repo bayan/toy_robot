@@ -14,3 +14,5 @@ gem "standard", "~> 1.3"
 gem "matrix", "~> 0.4.2"
 
 gem "minitest-reporters", "~> 1.6.1"
+
+gem "thor", "~> 1.3.0"
