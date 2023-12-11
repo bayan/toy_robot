@@ -5,7 +5,6 @@ require "toy_robot"
 
 module ToyRobot
   class CLI < Thor
-
     include ToyRobot
     include TableDirection::Constants
 
@@ -17,7 +16,7 @@ module ToyRobot
 
     desc "", "Run the Toy Robot Simulation"
     option :size, type: :numeric, default: 5, banner: "Length and width of the simulated square table."
-    def run_simulation()
+    def run_simulation
       size = options[:size]
       unless size > 0 && size.instance_of?(Integer)
         raise Thor::MalformattedArgumentError, "Size must be a positive integer."
