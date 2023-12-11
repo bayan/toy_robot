@@ -1,24 +1,48 @@
-# ToyRobot
+# ToyRobot Coding Challenge
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/toy_robot`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Technical interview coding take home test. See [ROBOT_CHALLENGE_DESCRIPTION.md](ROBOT_CHALLENGE_DESCRIPTION.md) for details on the requirements for the challenge.
 
 ## Usage
 
-TODO: Write usage instructions here
+This repository uses Ruby, and has been tested successfully using [version 3.2.2](.ruby-version) and [Bundler](https://bundler.io/). It can be built and installed locally as a Ruby Gem, or run entirely using Bundler.
+
+### Install and run locally as a Ruby Gem
+
+```console
+$ git clone https://github.com/bayan/toy_robot.git
+$ cd toy_robot
+$ bundle install
+$ gem build toy_robot.gemspec
+$ gem install ./toy_robot-0.1.0.gem
+```
+
+Running the above commands successfully will install an executable called `robot_sim` in your Gem installation directory. For example, if you are using the Homebrew installed version of Ruby 3.2.2, on your system, Ruby Gem executables may be located here: `/opt/homebrew/lib/ruby/gems/3.2.0/bin/`. You can get some help by running the following command:
+
+```console
+$ /path/to/robot_sim --help
+Commands:
+                            # Run the Toy Robot Simulation
+  robot_sim help [COMMAND]  # Describe available commands or one specific command
+  robot_sim version         # Display the version.
+```
+
+Run the toy robot simulator with this command:
+
+```console
+$ /path/to/robot_sim --size 5
+```
+
+Start entering commands (as described in the [challenge specification](ROBOT_CHALLENGE_DESCRIPTION.md)). Ctrl-C or Ctrl-D to exit the simulator.
+
+Alternatvily, you can pipe in some commands directly from a file:
+```console
+$ cat test/examples/example1.txt | /path/to/robot_sim --size 5
+Output: 0,1,NORTH
+```
+
+### Run locally using Bundler in development mode.
+
+Refer to Development instructions below.
 
 ## Development
 
@@ -28,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/toy_robot. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/toy_robot/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/bayan/toy_robot. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/bayan/toy_robot/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -36,4 +60,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the ToyRobot project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/toy_robot/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the ToyRobot project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/bayan/toy_robot/blob/main/CODE_OF_CONDUCT.md).
