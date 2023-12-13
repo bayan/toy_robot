@@ -7,7 +7,9 @@ module ToyRobot
     class Move < Base
       FORMAT = /^MOVE$/
 
-      def self.execute(stage, robot, obstacles, *arguments)
+      def self.execute(simulation, *arguments)
+        stage = simulation.stage
+        robot = simulation.robot
         if robot.on_table?
           position = robot.position + robot.direction
           if stage.valid_position?(position)

@@ -7,7 +7,8 @@ module ToyRobot
     class Report < Base
       FORMAT = /^REPORT$/
 
-      def self.execute(stage, robot, obstacles, *arguments)
+      def self.execute(simulation, *arguments)
+        robot = simulation.robot
         if robot.on_table?
           puts "Output: #{robot.position.to_a.join(",")},#{robot.direction_label}"
         end

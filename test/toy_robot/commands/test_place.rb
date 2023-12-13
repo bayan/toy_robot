@@ -10,7 +10,8 @@ class TestCommandsPlace < Minitest::Test
     position = Vector[3, 1]
     direction = EAST_VECTOR
     obstacles = []
-    Command::Place.execute(stage, robot, obstacles, position, direction)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.execute(simulation, position, direction)
     assert robot.on_table?
     assert_equal robot.position, position
     assert_equal robot.direction, direction
@@ -21,7 +22,8 @@ class TestCommandsPlace < Minitest::Test
     robot = Robot.new
     position = Vector[3, 1]
     obstacles = []
-    Command::Place.execute(stage, robot, obstacles, position)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.execute(simulation, position)
     refute robot.on_table?
     assert_nil robot.position
     assert_nil robot.direction
@@ -33,7 +35,8 @@ class TestCommandsPlace < Minitest::Test
     position = nil
     direction = WEST_VECTOR
     obstacles = []
-    Command::Place.execute(stage, robot, obstacles, position, direction)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.execute(simulation, position, direction)
     refute robot.on_table?
     assert_nil robot.position
     assert_nil robot.direction
@@ -46,7 +49,8 @@ class TestCommandsPlace < Minitest::Test
     robot.face_direction(NORTH_VECTOR)
     position = Vector[3, 1]
     obstacles = []
-    Command::Place.execute(stage, robot, obstacles, position)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.execute(simulation, position)
     assert robot.on_table?
     assert_equal robot.position, Vector[4, 5]
     assert_equal robot.direction, NORTH_VECTOR
@@ -60,7 +64,8 @@ class TestCommandsPlace < Minitest::Test
     position = nil
     direction = WEST_VECTOR
     obstacles = []
-    Command::Place.execute(stage, robot, obstacles, position, direction)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.execute(simulation, position, direction)
     assert robot.on_table?
     assert_equal robot.position, Vector[4, 5]
     assert_equal robot.direction, NORTH_VECTOR
@@ -93,7 +98,8 @@ class TestCommandsPlace < Minitest::Test
     refute robot.on_table?
     command_string = "PLACE 0,5,NORTH"
     obstacles = []
-    Command::Place.parse_and_execute(stage, robot, obstacles, command_string)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.parse_and_execute(simulation, command_string)
     assert robot.on_table?
     assert_equal robot.position, Vector[0, 5]
     assert_equal robot.direction, NORTH_VECTOR
@@ -105,7 +111,8 @@ class TestCommandsPlace < Minitest::Test
     refute robot.on_table?
     command_string = "PLACE 0,5,UP"
     obstacles = []
-    Command::Place.parse_and_execute(stage, robot, obstacles, command_string)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Place.parse_and_execute(simulation, command_string)
     refute robot.on_table?
     refute_equal robot.position, Vector[0, 5]
     refute_equal robot.direction, NORTH_VECTOR

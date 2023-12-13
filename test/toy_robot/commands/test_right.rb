@@ -8,7 +8,8 @@ class TestCommandsRight < Minitest::Test
     robot = Robot.new
     refute robot.on_table?
     obstacles = []
-    Command::Right.execute(stage, robot, obstacles)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.execute(simulation)
     refute robot.on_table?
     assert_nil robot.position
     assert_nil robot.direction
@@ -18,7 +19,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: NORTH_VECTOR)
     obstacles = []
-    Command::Right.execute(stage, robot, obstacles)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.execute(simulation)
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, EAST_VECTOR
   end
@@ -27,7 +29,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: SOUTH_VECTOR)
     obstacles = []
-    Command::Right.execute(stage, robot, obstacles)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.execute(simulation)
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, WEST_VECTOR
   end
@@ -36,7 +39,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: EAST_VECTOR)
     obstacles = []
-    Command::Right.execute(stage, robot, obstacles)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.execute(simulation)
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, SOUTH_VECTOR
   end
@@ -45,7 +49,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: WEST_VECTOR)
     obstacles = []
-    Command::Right.execute(stage, robot, obstacles)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.execute(simulation)
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, NORTH_VECTOR
   end
@@ -57,19 +62,23 @@ class TestCommandsRight < Minitest::Test
     corners.each do |corner|
       robot = Robot.new(position: corner, direction: NORTH_VECTOR)
 
-      Command::Right.execute(stage, robot, obstacles)
+      simulation = Simulation.new(stage, robot, obstacles)
+      Command::Right.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, EAST_VECTOR
 
-      Command::Right.execute(stage, robot, obstacles)
+      simulation = Simulation.new(stage, robot, obstacles)
+      Command::Right.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, SOUTH_VECTOR
 
-      Command::Right.execute(stage, robot, obstacles)
+      simulation = Simulation.new(stage, robot, obstacles)
+      Command::Right.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, WEST_VECTOR
 
-      Command::Right.execute(stage, robot, obstacles)
+      simulation = Simulation.new(stage, robot, obstacles)
+      Command::Right.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, NORTH_VECTOR
     end
@@ -79,7 +88,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     obstacles = []
-    Command::Right.execute(stage, robot, obstacles)
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.execute(simulation)
     refute robot.on_table?
     assert_nil robot.position
     assert_nil robot.direction
@@ -103,7 +113,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
-    Command::Right.parse_and_execute(stage, robot, obstacles, "RIGHT")
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.parse_and_execute(simulation, "RIGHT")
     assert_equal robot.position, Vector[3, 3]
     assert_equal robot.direction, EAST_VECTOR
   end
@@ -112,7 +123,8 @@ class TestCommandsRight < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
-    Command::Right.parse_and_execute(stage, robot, obstacles, "Righto!")
+    simulation = Simulation.new(stage, robot, obstacles)
+    Command::Right.parse_and_execute(simulation, "Righto!")
     assert_equal robot.position, Vector[3, 3]
     assert_equal robot.direction, NORTH_VECTOR
   end

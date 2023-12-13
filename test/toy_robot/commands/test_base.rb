@@ -5,8 +5,9 @@ class TestCommandsBase < Minitest::Test
     stage = Stage.new(0..5)
     robot = Robot.new
     obstacles = []
+    simulation = Simulation.new(stage, robot, obstacles)
     assert_raises(NotImplementedError) do
-      Command::Base.execute(stage, robot, obstacles)
+      Command::Base.execute(simulation)
     end
   end
 end

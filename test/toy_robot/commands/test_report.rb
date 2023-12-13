@@ -8,8 +8,9 @@ class TestCommandsReport < Minitest::Test
     robot = Robot.new
     refute robot.on_table?
     obstacles = []
+    simulation = Simulation.new(stage, robot, obstacles)
     assert_output("") do
-      Command::Report.execute(stage, robot, obstacles)
+      Command::Report.execute(simulation)
     end
   end
 
@@ -17,8 +18,9 @@ class TestCommandsReport < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 1], direction: NORTH_VECTOR)
     obstacles = []
+    simulation = Simulation.new(stage, robot, obstacles)
     assert_output("Output: 4,1,NORTH\n") do
-      Command::Report.execute(stage, robot, obstacles)
+      Command::Report.execute(simulation)
     end
   end
 
@@ -40,8 +42,9 @@ class TestCommandsReport < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
+    simulation = Simulation.new(stage, robot, obstacles)
     assert_output("Output: 3,3,NORTH\n") do
-      Command::Report.parse_and_execute(stage, robot, obstacles, "REPORT")
+      Command::Report.parse_and_execute(simulation, "REPORT")
     end
   end
 
@@ -49,8 +52,9 @@ class TestCommandsReport < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
+    simulation = Simulation.new(stage, robot, obstacles)
     assert_output("") do
-      Command::Report.parse_and_execute(stage, robot, obstacles, "RIPOURT")
+      Command::Report.parse_and_execute(simulation, "RIPOURT")
     end
   end
 end

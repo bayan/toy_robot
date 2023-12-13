@@ -14,14 +14,14 @@ module ToyRobot
         !!self::FORMAT.match?(command_string)
       end
 
-      def self.execute(stage, robot, obstacles, *arguments)
+      def self.execute(simulation, *arguments)
         raise NotImplementedError, "Abstract method Base.execute called."
       end
 
-      def self.parse_and_execute(stage, robot, obstacles, command_string)
+      def self.parse_and_execute(simulation, command_string)
         return unless valid_format?(command_string)
         arguments = parse_arguments(command_string)
-        execute(stage, robot, obstacles, *arguments)
+        execute(simulation, *arguments)
       end
 
       class << self

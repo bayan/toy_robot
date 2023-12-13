@@ -22,11 +22,23 @@ module ToyRobot
         raise Thor::MalformattedArgumentError, "Size must be a positive integer."
       end
       stage = Stage.new(0..size, 0..size)
-      obstacles = []
       robot = Robot.new
+
+      simulation = Simulation.new(stage, robot)
+
+      obstacle_position_format = /^(\d+),\s*(\d+)\n$/
+
+      File.open('obstacles.txt', 'r') do |file|
+        file.each_line do |line|
+          if obstacle_position_format.match?(line)
+            x,y = obstacle_position_format.match(line).captures
+            simulation.add_obstacle_at(Vector[x,y])
+          end
+        end
+      end
+
       $stdin.each_line do |line|
-        command_string = line.chomp
-        Command::StringProcessor.process_command(stage, robot, obstacles, command_string)
+        simulation.process_command(line.chomp)
       end
     end
 

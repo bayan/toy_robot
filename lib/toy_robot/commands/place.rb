@@ -7,8 +7,10 @@ module ToyRobot
     class Place < Base
       FORMAT = /^PLACE\s+(-?\d+),(-?\d+),(NORTH|SOUTH|EAST|WEST)$/
 
-      def self.execute(stage, robot, obstacles, *arguments)
+      def self.execute(simulation, *arguments)
         position, direction = arguments
+        stage = simulation.stage
+        robot = simulation.robot
         if stage.valid_position?(position) && stage.valid_direction?(direction)
           robot.move_to(position)
           robot.face_direction(direction)

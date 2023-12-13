@@ -7,7 +7,8 @@ module ToyRobot
     class Right < Base
       FORMAT = /^RIGHT$/
 
-      def self.execute(stage, robot, obstacles, *arguments)
+      def self.execute(simulation, *arguments)
+        robot = simulation.robot
         if robot.on_table?
           direction = TableDirection.rotate_clockwise_90_degrees(robot.direction)
           robot.face_direction(direction)
