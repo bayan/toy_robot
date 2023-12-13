@@ -219,7 +219,7 @@ class TestSimulation < Minitest::Test
 
   def test_ignore_path_to_obstacle
     stage = Stage.new(0..5, 0..5)
-    target_position = Vector[3,4]
+    target_position = Vector[3, 4]
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     simulation.add_obstacle_at(target_position)
@@ -227,5 +227,4 @@ class TestSimulation < Minitest::Test
     assert_equal path, []
     assert path.empty?
   end
-
 end
