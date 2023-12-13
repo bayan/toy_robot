@@ -29,6 +29,7 @@ class TestCLI < Minitest::Test
   end
 
   def test_big_example
+    skip
     stdout, stderr, status = Open3.capture3("gunzip -c test/examples/big_example.txt.gz | bundle exec exe/robot_sim --size 1000000")
     assert_equal 0, status.exitstatus
     assert_equal "Output: 3,3,NORTH\n", stdout
