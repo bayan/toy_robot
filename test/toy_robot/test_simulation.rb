@@ -153,4 +153,70 @@ class TestSimulation < Minitest::Test
     assert_equal robot.position, Vector[4, 5]
     assert_equal robot.direction, NORTH_VECTOR
   end
+
+  def test_ignore_find_path_while_off_table
+    stage = Stage.new(0..5, 0..5)
+    robot = Robot.new
+    refute robot.on_table?
+    simulation = Simulation.new(stage, robot)
+    path = simulation.robot_path_to(Vector[1,2])
+    assert path.empty?
+  end
+
+  def test_path_to_robot_location
+    stage = Stage.new(0..5, 0..5)
+    position = Vector[3, 3]
+    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    simulation = Simulation.new(stage, robot)
+    assert_output("[3, 3]\n") do
+      Command::FindPath.execute(simulation, position)
+    end
+    path = simulation.robot_path_to(Vector[3,3])
+    assert_equal path, [Vector[3,3]]
+  end
+
+  def test_find_path_no_obstacles
+    stage = Stage.new(0..5, 0..5)
+    position = Vector[3, 3]
+    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    simulation = Simulation.new(stage, robot)
+    path = simulation.robot_path_to(Vector[3,5])
+    assert_equal path, [Vector[3,3], Vector[3,4], Vector[3,5]]
+  end
+  
+  def test_find_path_with_obstacles
+    stage = Stage.new(0..5, 0..5)
+    position = Vector[3, 3]
+    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    simulation = Simulation.new(stage, robot)
+    simulation.add_obstacle_at(Vector[3,4])
+    path = simulation.robot_path_to(Vector[3,5])
+    assert_equal path, [Vector[3, 3], Vector[4, 3], Vector[4, 4], Vector[4, 5], Vector[3, 5]]
+  end
+
+  def test_cannot_find_path_if_completely_blocked
+    stage = Stage.new(0..5, 0..5)
+    position = Vector[1, 3]
+    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    simulation = Simulation.new(stage, robot)
+    simulation.add_obstacle_at(Vector[0,2])
+    simulation.add_obstacle_at(Vector[1,2])
+    simulation.add_obstacle_at(Vector[2,2])
+    simulation.add_obstacle_at(Vector[2,3])
+    simulation.add_obstacle_at(Vector[2,4])
+    simulation.add_obstacle_at(Vector[2,5])
+    path = simulation.robot_path_to(Vector[3,1])
+    # assert path.empty?
+    assert_equal path, []
+  end
+
+  def test_ignore_off_table_destination
+    stage = Stage.new(0..5, 0..5)
+    position = Vector[3, 3]
+    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    simulation = Simulation.new(stage, robot)
+    path = simulation.robot_path_to(Vector[9,8])
+    assert path.empty?
+  end
+
 end
