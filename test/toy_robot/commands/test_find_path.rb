@@ -9,7 +9,7 @@ class TestFindPath < Minitest::Test
     refute robot.on_table?
     simulation = Simulation.new(stage, robot)
     assert_output("") do
-      Command::FindPath.execute(simulation, Vector[1,2])
+      Command::FindPath.execute(simulation, Vector[1, 2])
     end
   end
 
@@ -29,7 +29,7 @@ class TestFindPath < Minitest::Test
     robot = Robot.new(position: position, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     assert_output("[3, 3] -> [3, 4] -> [3, 5]\n") do
-      Command::FindPath.execute(simulation, Vector[3,5])
+      Command::FindPath.execute(simulation, Vector[3, 5])
     end
   end
 
@@ -38,9 +38,9 @@ class TestFindPath < Minitest::Test
     position = Vector[3, 3]
     robot = Robot.new(position: position, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
-    simulation.add_obstacle_at(Vector[3,4])
+    simulation.add_obstacle_at(Vector[3, 4])
     assert_output("[3, 3] -> [4, 3] -> [4, 4] -> [4, 5] -> [3, 5]\n") do
-      Command::FindPath.execute(simulation, Vector[3,5])
+      Command::FindPath.execute(simulation, Vector[3, 5])
     end
   end
 
@@ -49,14 +49,14 @@ class TestFindPath < Minitest::Test
     position = Vector[1, 3]
     robot = Robot.new(position: position, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
-    simulation.add_obstacle_at(Vector[0,2])
-    simulation.add_obstacle_at(Vector[1,2])
-    simulation.add_obstacle_at(Vector[2,2])
-    simulation.add_obstacle_at(Vector[2,3])
-    simulation.add_obstacle_at(Vector[2,4])
-    simulation.add_obstacle_at(Vector[2,5])
+    simulation.add_obstacle_at(Vector[0, 2])
+    simulation.add_obstacle_at(Vector[1, 2])
+    simulation.add_obstacle_at(Vector[2, 2])
+    simulation.add_obstacle_at(Vector[2, 3])
+    simulation.add_obstacle_at(Vector[2, 4])
+    simulation.add_obstacle_at(Vector[2, 5])
     assert_output("") do
-      Command::FindPath.execute(simulation, Vector[3,1])
+      Command::FindPath.execute(simulation, Vector[3, 1])
     end
   end
 
@@ -66,8 +66,7 @@ class TestFindPath < Minitest::Test
     robot = Robot.new(position: position, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     assert_output("") do
-      Command::FindPath.execute(simulation, Vector[9,8])
+      Command::FindPath.execute(simulation, Vector[9, 8])
     end
   end
-
 end

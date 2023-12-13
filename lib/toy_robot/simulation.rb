@@ -44,7 +44,7 @@ module ToyRobot
       return [] if !robot.on_table? || !stage.valid_position?(position)
       return [position] if robot.position == position
       paths = [[robot.position]]
-      while !paths.empty?
+      until paths.empty?
         next_paths = []
         paths.each do |path|
           last_position = path.last
@@ -63,7 +63,7 @@ module ToyRobot
         end
         paths = next_paths
       end
-      return []
+      []
     end
 
     def process_command(command_string)

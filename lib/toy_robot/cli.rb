@@ -31,11 +31,11 @@ module ToyRobot
 
       obstacles_filepath = options[:obstacles_filepath]
       unless obstacles_filepath.nil?
-        File.open(obstacles_filepath, 'r') do |file|
+        File.open(obstacles_filepath, "r") do |file|
           file.each_line do |line|
             if obstacle_position_format.match?(line)
-              x,y = obstacle_position_format.match(line).captures.map(&:to_i)
-              simulation.add_obstacle_at(Vector[x,y])
+              x, y = obstacle_position_format.match(line).captures.map(&:to_i)
+              simulation.add_obstacle_at(Vector[x, y])
             end
           end
         end

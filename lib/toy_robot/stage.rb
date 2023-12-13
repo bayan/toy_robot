@@ -4,7 +4,6 @@ require "matrix"
 
 module ToyRobot
   class Stage
-
     attr_reader :dimension_ranges
 
     def initialize(*dimension_ranges)

@@ -46,5 +46,4 @@ class TestCLI < Minitest::Test
     assert_equal "", stdout
     assert_equal "", stderr
   end
-
 end

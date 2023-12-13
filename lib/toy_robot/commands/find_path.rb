@@ -10,7 +10,6 @@ module ToyRobot
       def self.execute(simulation, *arguments)
         position = arguments.last
         stage = simulation.stage
-        robot = simulation.robot
         if stage.valid_position?(position)
           path = simulation.robot_path_to(position)
           if !path.empty?

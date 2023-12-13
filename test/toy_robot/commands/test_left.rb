@@ -14,7 +14,7 @@ class TestCommandsLeft < Minitest::Test
     assert_nil robot.position
     assert_nil robot.direction
   end
-  
+
   def test_turn_left_from_north
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: NORTH_VECTOR)
@@ -24,7 +24,7 @@ class TestCommandsLeft < Minitest::Test
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, WEST_VECTOR
   end
-  
+
   def test_turn_from_south
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: SOUTH_VECTOR)
@@ -34,7 +34,7 @@ class TestCommandsLeft < Minitest::Test
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, EAST_VECTOR
   end
-  
+
   def test_turn_from_east
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: EAST_VECTOR)
@@ -44,7 +44,7 @@ class TestCommandsLeft < Minitest::Test
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, NORTH_VECTOR
   end
-  
+
   def test_turn_from_west
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: WEST_VECTOR)
@@ -54,7 +54,7 @@ class TestCommandsLeft < Minitest::Test
     assert_equal robot.position, Vector[4, 2]
     assert_equal robot.direction, SOUTH_VECTOR
   end
-  
+
   def test_left_turns_from_corners
     stage = Stage.new(0..5, 0..5)
     corners = [Vector[0, 0], Vector[0, 5], Vector[5, 0], Vector[5, 5]]
@@ -62,25 +62,25 @@ class TestCommandsLeft < Minitest::Test
       robot = Robot.new(position: corner, direction: NORTH_VECTOR)
       obstacles = []
       simulation = Simulation.new(stage, robot, obstacles)
-      
+
       Command::Left.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, WEST_VECTOR
-      
+
       Command::Left.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, SOUTH_VECTOR
-      
+
       Command::Left.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, EAST_VECTOR
-      
+
       Command::Left.execute(simulation)
       assert_equal robot.position, corner
       assert_equal robot.direction, NORTH_VECTOR
     end
   end
-  
+
   def test_ignore_move_if_off_table
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new
@@ -91,11 +91,11 @@ class TestCommandsLeft < Minitest::Test
     assert_nil robot.position
     assert_nil robot.direction
   end
-  
+
   def test_matches_valid_command_string
     assert Command::Left.valid_format?("LEFT")
   end
-  
+
   def test_does_not_match_invalid_command_string
     refute Command::Left.valid_format?("LEFT TURN")
     refute Command::Left.valid_format?("left")
@@ -105,7 +105,7 @@ class TestCommandsLeft < Minitest::Test
     refute Command::Left.valid_format?("REPORT")
     refute Command::Left.valid_format?("RIGHT")
   end
-  
+
   def test_executes_valid_command_string
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
@@ -115,7 +115,7 @@ class TestCommandsLeft < Minitest::Test
     assert_equal robot.position, Vector[3, 3]
     assert_equal robot.direction, WEST_VECTOR
   end
-  
+
   def test_ignores_invalid_command_string
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
