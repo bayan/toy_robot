@@ -47,13 +47,7 @@ module ToyRobot
       until paths.empty?
         next_paths = []
         paths.each do |path|
-          last_position = path.last
-          adjacents = [
-            last_position + NORTH_VECTOR,
-            last_position + SOUTH_VECTOR,
-            last_position + EAST_VECTOR,
-            last_position + WEST_VECTOR
-          ]
+          adjacents = adjacent_positions_to(path.last)
           adjacents.each do |adjacent|
             new_path = path + [adjacent]
             return new_path if adjacent == position
@@ -70,6 +64,14 @@ module ToyRobot
       COMMANDS
         .find { |command| command.valid_format?(command_string) }
         &.parse_and_execute(self, command_string)
+    end
+
+    private
+
+    def adjacent_positions_to(position)
+      [NORTH_VECTOR, SOUTH_VECTOR, EAST_VECTOR, WEST_VECTOR].map do |direction|
+        position + direction
+      end
     end
   end
 end
