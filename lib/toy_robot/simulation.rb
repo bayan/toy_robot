@@ -41,7 +41,7 @@ module ToyRobot
     end
 
     def robot_path_to(position)
-      return [] if !robot.on_table? || !stage.valid_position?(position)
+      return [] if !robot.on_table?  || !position_vacant?(position) || !stage.valid_position?(position)
       return [position] if robot.position == position
       paths = [[robot.position]]
       until paths.empty?
