@@ -7,15 +7,45 @@ class TestSimulation < Minitest::Test
   include TableDirection::Constants
 
   def test_cannot_place_robot_on_an_obstacle
-    skip
+    stage = Stage.new(0..5, 0..5)
+    robot = Robot.new
+    obstacles = [Vector[2,3]]
+    simulation = Simulation.new(stage, robot, obstacles)
+    simulation.process_command("PLACE 2,3,NORTH")
+    refute robot.on_table?
   end
 
   def test_cannot_place_obstacle_on_a_robot
-    skip
+    stage = Stage.new(0..5, 0..5)
+    position = Vector[2,3]
+    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    simulation = Simulation.new(stage, robot)
+    simulation.add_obstacle_at(position)
+    assert simulation.obstacles.empty?
+  end
+  
+  def test_can_only_have_one_obstacle_at_a_given_location
+    stage = Stage.new(0..5, 0..5)
+    robot = Robot.new
+    obstacle = Vector[2,3]
+    simulation = Simulation.new(stage, robot)
+    3.times do
+      simulation.add_obstacle_at(obstacle)
+    end
+    assert simulation.obstacles.size == 1
   end
 
-  def test_can_only_have_one_obstacle_at_a_given_location
-    skip
+  def test_cannot_move_robot_onto_an_obstacle
+    stage = Stage.new(0..5, 0..5)
+    robot = Robot.new
+    position = Vector[2,3]
+    simulation = Simulation.new(stage, robot)
+    simulation.add_obstacle_at(position)
+    simulation.process_command("PLACE 2,2,NORTH")
+    assert robot.on_table?
+    assert robot.position == Vector[2,2]
+    simulation.process_command("MOVE")
+    assert robot.position == Vector[2,2]
   end
 
   def test_ignore_invalid_command_strings

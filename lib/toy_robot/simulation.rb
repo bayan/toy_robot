@@ -28,8 +28,12 @@ module ToyRobot
 
     def add_obstacle_at(position)
       if stage.valid_position?(position) && robot.position != position
-        @obstacles.add(position)
+        obstacles.add(position)
       end
+    end
+
+    def position_vacant?(position)
+      !obstacles.include?(position)
     end
 
     def process_command(command_string)

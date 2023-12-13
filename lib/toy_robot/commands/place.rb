@@ -11,7 +11,7 @@ module ToyRobot
         position, direction = arguments
         stage = simulation.stage
         robot = simulation.robot
-        if stage.valid_position?(position) && stage.valid_direction?(direction)
+        if stage.valid_position?(position) && stage.valid_direction?(direction) && simulation.position_vacant?(position)
           robot.move_to(position)
           robot.face_direction(direction)
         end

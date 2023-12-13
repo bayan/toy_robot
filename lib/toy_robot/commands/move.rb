@@ -12,7 +12,7 @@ module ToyRobot
         robot = simulation.robot
         if robot.on_table?
           position = robot.position + robot.direction
-          if stage.valid_position?(position)
+          if stage.valid_position?(position) && simulation.position_vacant?(position)
             robot.move_to(position)
           end
         end
