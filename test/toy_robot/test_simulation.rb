@@ -205,8 +205,7 @@ class TestSimulation < Minitest::Test
     simulation.add_obstacle_at(Vector[2, 4])
     simulation.add_obstacle_at(Vector[2, 5])
     path = simulation.robot_path_to(Vector[3, 1])
-    # assert path.empty?
-    assert_equal path, []
+    assert path.empty?
   end
 
   def test_ignore_off_table_destination
