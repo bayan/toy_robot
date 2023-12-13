@@ -16,4 +16,5 @@ end
 
 group :development do
   gem "standard", "~> 1.3"
+  gem "debug", "~> 1.9"
 end
