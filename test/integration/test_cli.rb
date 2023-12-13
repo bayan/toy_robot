@@ -35,4 +35,16 @@ class TestCLI < Minitest::Test
     assert_equal "Output: 3,3,NORTH\n", stdout
     assert_equal "", stderr
   end
+
+  def test_obstacles_file
+    input = <<~EOS
+      PLACE 1,2,WEST
+      REPORT
+    EOS
+    stdout, stderr, status = Open3.capture3("bundle exec exe/robot_sim --obstacles-filepath test/examples/obstacles.txt", stdin_data: input)
+    assert_equal 0, status.exitstatus
+    assert_equal "", stdout
+    assert_equal "", stderr
+  end
+
 end

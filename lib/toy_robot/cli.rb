@@ -14,8 +14,9 @@ module ToyRobot
       puts "Toy Robot Simulator Version #{VERSION}"
     end
 
-    desc "", "Run the Toy Robot Simulation"
+    desc "run_simulation", "Run the Toy Robot Simulation. This is the default command if none is provided."
     option :size, type: :numeric, default: 5, banner: "Length and width of the simulated square table."
+    option :obstacles_filepath, type: :string, banner: "Path to an obstacles file with a pair of comma separated digits per line to indicate obstacle locations."
     def run_simulation
       size = options[:size]
       unless size > 0 && size.instance_of?(Integer)
@@ -28,11 +29,14 @@ module ToyRobot
 
       obstacle_position_format = /^(\d+),\s*(\d+)\n$/
 
-      File.open('obstacles.txt', 'r') do |file|
-        file.each_line do |line|
-          if obstacle_position_format.match?(line)
-            x,y = obstacle_position_format.match(line).captures
-            simulation.add_obstacle_at(Vector[x,y])
+      obstacles_filepath = options[:obstacles_filepath]
+      unless obstacles_filepath.nil?
+        File.open(obstacles_filepath, 'r') do |file|
+          file.each_line do |line|
+            if obstacle_position_format.match?(line)
+              x,y = obstacle_position_format.match(line).captures.map(&:to_i)
+              simulation.add_obstacle_at(Vector[x,y])
+            end
           end
         end
       end
