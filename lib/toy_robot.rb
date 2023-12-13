@@ -3,6 +3,7 @@
 require_relative "toy_robot/version"
 require_relative "toy_robot/stage"
 require_relative "toy_robot/robot"
+require_relative "toy_robot/obstacle"
 require_relative "toy_robot/table_direction"
 require_relative "toy_robot/commands/string_processor"
 
