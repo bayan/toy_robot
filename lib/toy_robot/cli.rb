@@ -21,7 +21,7 @@ module ToyRobot
       unless size > 0 && size.instance_of?(Integer)
         raise Thor::MalformattedArgumentError, "Size must be a positive integer."
       end
-      stage = Table.new(0..size, 0..size)
+      stage = Stage.new(0..size, 0..size)
       robot = Robot.new
       $stdin.each_line do |line|
         command_string = line.chomp

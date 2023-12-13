@@ -4,7 +4,7 @@ class TestCommandsPlace < Minitest::Test
   include TableDirection::Constants
 
   def test_places_a_robot_on_the_table
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     refute robot.on_table?
     position = Vector[3, 1]
@@ -16,7 +16,7 @@ class TestCommandsPlace < Minitest::Test
   end
 
   def test_ignore_initial_placement_without_direction
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     position = Vector[3, 1]
     Command::Place.execute(stage, robot, position)
@@ -26,7 +26,7 @@ class TestCommandsPlace < Minitest::Test
   end
 
   def test_ignore_initial_placement_without_position
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     position = nil
     direction = WEST_VECTOR
@@ -37,7 +37,7 @@ class TestCommandsPlace < Minitest::Test
   end
 
   def test_ignore_new_placement_without_direction
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     robot.move_to(Vector[4, 5])
     robot.face_direction(NORTH_VECTOR)
@@ -49,7 +49,7 @@ class TestCommandsPlace < Minitest::Test
   end
 
   def test_ignore_new_placement_without_position
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     robot.move_to(Vector[4, 5])
     robot.face_direction(NORTH_VECTOR)
@@ -83,7 +83,7 @@ class TestCommandsPlace < Minitest::Test
   end
 
   def test_executes_valid_command_string
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     refute robot.on_table?
     command_string = "PLACE 0,5,NORTH"
@@ -94,7 +94,7 @@ class TestCommandsPlace < Minitest::Test
   end
 
   def test_ignores_invalid_command_string
-    stage = Table.new(0..5, 0..5)
+    stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     refute robot.on_table?
     command_string = "PLACE 0,5,UP"

@@ -3,7 +3,7 @@
 require "matrix"
 
 module ToyRobot
-  class MultiDimensionalStage
+  class Stage
 
     attr_reader :dimension_ranges
 
