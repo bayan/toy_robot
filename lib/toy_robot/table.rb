@@ -5,7 +5,7 @@ require_relative "multi_dimensional_stage"
 
 module ToyRobot
   class Table < MultiDimensionalStage
-    def self.build(x_range, y_range)
+    def initialize(x_range, y_range)
       super(x_range, y_range)
     end
 

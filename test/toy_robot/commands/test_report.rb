@@ -4,7 +4,7 @@ class TestCommandsReport < Minitest::Test
   include TableDirection::Constants
 
   def test_ignore_report_while_off_table
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     refute robot.on_table?
     assert_output("") do
@@ -13,7 +13,7 @@ class TestCommandsReport < Minitest::Test
   end
 
   def test_report_direction_and_position
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 1], direction: NORTH_VECTOR)
     assert_output("Output: 4,1,NORTH\n") do
       Command::Report.execute(stage, robot)
@@ -35,7 +35,7 @@ class TestCommandsReport < Minitest::Test
   end
 
   def test_executes_valid_command_string
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     assert_output("Output: 3,3,NORTH\n") do
       Command::Report.parse_and_execute(stage, robot, "REPORT")
@@ -43,7 +43,7 @@ class TestCommandsReport < Minitest::Test
   end
 
   def test_ignores_invalid_command_string
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     assert_output("") do
       Command::Report.parse_and_execute(stage, robot, "RIPOURT")

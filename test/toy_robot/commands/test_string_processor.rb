@@ -4,7 +4,7 @@ class TestStringProcessor < Minitest::Test
   include TableDirection::Constants
 
   def test_ignore_invalid_command_strings
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     command_strings = [
       "foobar",
@@ -22,7 +22,7 @@ class TestStringProcessor < Minitest::Test
   end
 
   def test_example_command_sequence_1
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     command_strings = [
       "PLACE 0,0,NORTH",
@@ -37,7 +37,7 @@ class TestStringProcessor < Minitest::Test
   end
 
   def test_example_command_sequence_2
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     command_strings = [
       "PLACE 0,0,NORTH",
@@ -52,7 +52,7 @@ class TestStringProcessor < Minitest::Test
   end
 
   def test_example_command_sequence_3
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     command_strings = [
       "PLACE 1,2,EAST",
@@ -70,7 +70,7 @@ class TestStringProcessor < Minitest::Test
   end
 
   def test_ignore_all_commands_prior_to_initial_placement
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     command_strings = %w[MOVE RIGHT REPORT LEFT MOVE REPORT]
     command_strings.each do |command_string|
@@ -85,7 +85,7 @@ class TestStringProcessor < Minitest::Test
   end
 
   def test_multiple_placements
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
 
     Command::StringProcessor.process_command(stage, robot, "PLACE 1,2,WEST")

@@ -3,9 +3,12 @@
 require "matrix"
 
 module ToyRobot
-  class MultiDimensionalStage < Data.define(:dimension_ranges)
-    def self.build(*dimension_ranges)
-      new(dimension_ranges)
+  class MultiDimensionalStage
+
+    attr_reader :dimension_ranges
+
+    def initialize(*dimension_ranges)
+      @dimension_ranges = dimension_ranges
     end
 
     def valid_position?(position)

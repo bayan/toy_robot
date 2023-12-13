@@ -4,7 +4,7 @@ class TestCommandsLeft < Minitest::Test
   include TableDirection::Constants
 
   def test_ignore_left_while_off_table
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     refute robot.on_table?
     Command::Left.execute(stage, robot)
@@ -14,7 +14,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_turn_left_from_north
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: NORTH_VECTOR)
     Command::Left.execute(stage, robot)
     assert_equal robot.position, Vector[4, 2]
@@ -22,7 +22,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_turn_from_south
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: SOUTH_VECTOR)
     Command::Left.execute(stage, robot)
     assert_equal robot.position, Vector[4, 2]
@@ -30,7 +30,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_turn_from_east
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: EAST_VECTOR)
     Command::Left.execute(stage, robot)
     assert_equal robot.position, Vector[4, 2]
@@ -38,7 +38,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_turn_from_west
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 2], direction: WEST_VECTOR)
     Command::Left.execute(stage, robot)
     assert_equal robot.position, Vector[4, 2]
@@ -46,7 +46,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_left_turns_from_corners
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     corners = [Vector[0, 0], Vector[0, 5], Vector[5, 0], Vector[5, 5]]
     corners.each do |corner|
       robot = Robot.new(position: corner, direction: NORTH_VECTOR)
@@ -70,7 +70,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_ignore_move_if_off_table
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new
     Command::Left.execute(stage, robot)
     refute robot.on_table?
@@ -93,7 +93,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_executes_valid_command_string
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     Command::Left.parse_and_execute(stage, robot, "LEFT")
     assert_equal robot.position, Vector[3, 3]
@@ -101,7 +101,7 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_ignores_invalid_command_string
-    stage = Table.build(0..5, 0..5)
+    stage = Table.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     Command::Left.parse_and_execute(stage, robot, "leeeefffftttt!")
     assert_equal robot.position, Vector[3, 3]
