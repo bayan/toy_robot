@@ -22,10 +22,11 @@ module ToyRobot
         raise Thor::MalformattedArgumentError, "Size must be a positive integer."
       end
       stage = Stage.new(0..size, 0..size)
+      obstacles = []
       robot = Robot.new
       $stdin.each_line do |line|
         command_string = line.chomp
-        Command::StringProcessor.process_command(stage, robot, command_string)
+        Command::StringProcessor.process_command(stage, robot, obstacles, command_string)
       end
     end
 

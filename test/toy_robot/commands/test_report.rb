@@ -7,16 +7,18 @@ class TestCommandsReport < Minitest::Test
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new
     refute robot.on_table?
+    obstacles = []
     assert_output("") do
-      Command::Report.execute(stage, robot)
+      Command::Report.execute(stage, robot, obstacles)
     end
   end
 
   def test_report_direction_and_position
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[4, 1], direction: NORTH_VECTOR)
+    obstacles = []
     assert_output("Output: 4,1,NORTH\n") do
-      Command::Report.execute(stage, robot)
+      Command::Report.execute(stage, robot, obstacles)
     end
   end
 
@@ -37,16 +39,18 @@ class TestCommandsReport < Minitest::Test
   def test_executes_valid_command_string
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
+    obstacles = []
     assert_output("Output: 3,3,NORTH\n") do
-      Command::Report.parse_and_execute(stage, robot, "REPORT")
+      Command::Report.parse_and_execute(stage, robot, obstacles, "REPORT")
     end
   end
 
   def test_ignores_invalid_command_string
     stage = Stage.new(0..5, 0..5)
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
+    obstacles = []
     assert_output("") do
-      Command::Report.parse_and_execute(stage, robot, "RIPOURT")
+      Command::Report.parse_and_execute(stage, robot, obstacles, "RIPOURT")
     end
   end
 end

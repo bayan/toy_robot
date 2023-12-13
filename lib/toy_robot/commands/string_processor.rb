@@ -17,10 +17,10 @@ module ToyRobot
         Right
       ]
 
-      def self.process_command(stage, robot, command_string)
+      def self.process_command(stage, robot, obstacles, command_string)
         COMMANDS
           .find { |command| command.valid_format?(command_string) }
-          &.parse_and_execute(stage, robot, command_string)
+          &.parse_and_execute(stage, robot, obstacles, command_string)
       end
     end
   end
