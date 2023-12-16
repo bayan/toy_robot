@@ -189,6 +189,7 @@ class TestSimulation < Minitest::Test
     robot = Robot.new(position: position, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     simulation.add_obstacle_at(Vector[3, 4])
+    simulation.add_obstacle_at(Vector[2, 4])
     path = simulation.robot_path_to(Vector[3, 5])
     assert_equal path, [Vector[3, 3], Vector[4, 3], Vector[4, 4], Vector[4, 5], Vector[3, 5]]
   end
