@@ -40,8 +40,12 @@ module ToyRobot
       !obstacles.include?(position)
     end
 
+    def position_valid_and_vacant?(position)
+      position_vacant?(position) && stage.valid_position?(position)
+    end
+
     def robot_path_to(position)
-      return [] if !robot.on_table? || !position_vacant?(position) || !stage.valid_position?(position)
+      return [] if !robot.on_table? || !position_valid_and_vacant?(position)
       return [position] if robot.position == position
       paths = [[robot.position]]
       until paths.empty?
@@ -51,7 +55,7 @@ module ToyRobot
           adjacents.each do |adjacent|
             new_path = path + [adjacent]
             return new_path if adjacent == position
-            next if path.include?(adjacent) || !position_vacant?(adjacent) || !stage.valid_position?(adjacent)
+            next if path.include?(adjacent) || !position_valid_and_vacant?(adjacent)
             next_paths.append(new_path)
           end
         end
