@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "base"
+require_relative 'base'
 
 module ToyRobot
   module Command
@@ -10,12 +10,12 @@ module ToyRobot
       def self.execute(simulation, *arguments)
         position = arguments.last
         stage = simulation.stage
-        if stage.valid_position?(position)
-          path = simulation.robot_path_to(position)
-          if !path.empty?
-            puts path.map(&:to_a).map(&:to_s).join(" -> ")
-          end
-        end
+        return unless stage.valid_position?(position)
+
+        path = simulation.robot_path_to(position)
+        return if path.empty?
+
+        puts path.map(&:to_a).map(&:to_s).join(' -> ')
       end
 
       class << self

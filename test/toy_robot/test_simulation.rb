@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require 'test_helper'
 
 class TestSimulation < Minitest::Test
   include TableDirection::Constants
@@ -10,14 +10,14 @@ class TestSimulation < Minitest::Test
     robot = Robot.new
     obstacles = [Vector[2, 3]]
     simulation = Simulation.new(stage, robot, obstacles)
-    simulation.process_command("PLACE 2,3,NORTH")
+    simulation.process_command('PLACE 2,3,NORTH')
     refute robot.on_table?
   end
 
   def test_cannot_place_obstacle_on_a_robot
     stage = Stage.new(0..5, 0..5)
     position = Vector[2, 3]
-    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     simulation.add_obstacle_at(position)
     assert simulation.obstacles.empty?
@@ -40,10 +40,10 @@ class TestSimulation < Minitest::Test
     position = Vector[2, 3]
     simulation = Simulation.new(stage, robot)
     simulation.add_obstacle_at(position)
-    simulation.process_command("PLACE 2,2,NORTH")
+    simulation.process_command('PLACE 2,2,NORTH')
     assert robot.on_table?
     assert robot.position == Vector[2, 2]
-    simulation.process_command("MOVE")
+    simulation.process_command('MOVE')
     assert robot.position == Vector[2, 2]
   end
 
@@ -53,11 +53,11 @@ class TestSimulation < Minitest::Test
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
     command_strings = [
-      "foobar",
-      "invalid",
-      "boargb fsdgisd fgqweorawsfg",
-      "",
-      "∫∆ˆ∑ˆ∆˜∂˜å•ø∂µπº•£ª£ƒµµµåº•™¡™£¡™£˜Ô˜ÔıÍ¨ÔÍÓÓ·"
+      'foobar',
+      'invalid',
+      'boargb fsdgisd fgqweorawsfg',
+      '',
+      '∫∆ˆ∑ˆ∆˜∂˜å•ø∂µπº•£ª£ƒµµµåº•™¡™£¡™£˜Ô˜ÔıÍ¨ÔÍÓÓ·'
     ]
     command_strings.each do |command_string|
       simulation.process_command(command_string)
@@ -73,9 +73,9 @@ class TestSimulation < Minitest::Test
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
     command_strings = [
-      "PLACE 0,0,NORTH",
-      "MOVE",
-      "REPORT"
+      'PLACE 0,0,NORTH',
+      'MOVE',
+      'REPORT'
     ]
     assert_output("Output: 0,1,NORTH\n") do
       command_strings.each do |command_string|
@@ -90,9 +90,9 @@ class TestSimulation < Minitest::Test
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
     command_strings = [
-      "PLACE 0,0,NORTH",
-      "MOVE",
-      "REPORT"
+      'PLACE 0,0,NORTH',
+      'MOVE',
+      'REPORT'
     ]
     assert_output("Output: 0,1,NORTH\n") do
       command_strings.each do |command_string|
@@ -107,12 +107,12 @@ class TestSimulation < Minitest::Test
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
     command_strings = [
-      "PLACE 1,2,EAST",
-      "MOVE",
-      "MOVE",
-      "LEFT",
-      "MOVE",
-      "REPORT"
+      'PLACE 1,2,EAST',
+      'MOVE',
+      'MOVE',
+      'LEFT',
+      'MOVE',
+      'REPORT'
     ]
     assert_output("Output: 3,3,NORTH\n") do
       command_strings.each do |command_string|
@@ -133,7 +133,7 @@ class TestSimulation < Minitest::Test
       assert_nil robot.direction
       refute robot.on_table?
     end
-    simulation.process_command("PLACE 1,2,EAST")
+    simulation.process_command('PLACE 1,2,EAST')
     assert_equal robot.position, Vector[1, 2]
     assert_equal robot.direction, EAST_VECTOR
   end
@@ -144,11 +144,11 @@ class TestSimulation < Minitest::Test
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
 
-    simulation.process_command("PLACE 1,2,WEST")
+    simulation.process_command('PLACE 1,2,WEST')
     assert_equal robot.position, Vector[1, 2]
     assert_equal robot.direction, WEST_VECTOR
 
-    simulation.process_command("PLACE 4,5,NORTH")
+    simulation.process_command('PLACE 4,5,NORTH')
     assert_equal robot.position, Vector[4, 5]
     assert_equal robot.direction, NORTH_VECTOR
   end
@@ -165,7 +165,7 @@ class TestSimulation < Minitest::Test
   def test_path_to_robot_location
     stage = Stage.new(0..5, 0..5)
     position = Vector[3, 3]
-    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     assert_output("[3, 3]\n") do
       Command::FindPath.execute(simulation, position)
@@ -177,7 +177,7 @@ class TestSimulation < Minitest::Test
   def test_find_path_no_obstacles
     stage = Stage.new(0..5, 0..5)
     position = Vector[3, 3]
-    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     path = simulation.robot_path_to(Vector[3, 5])
     assert_equal path, [Vector[3, 3], Vector[3, 4], Vector[3, 5]]
@@ -186,7 +186,7 @@ class TestSimulation < Minitest::Test
   def test_find_path_with_obstacles
     stage = Stage.new(0..5, 0..5)
     position = Vector[3, 3]
-    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     simulation.add_obstacle_at(Vector[3, 4])
     simulation.add_obstacle_at(Vector[2, 4])
@@ -197,7 +197,7 @@ class TestSimulation < Minitest::Test
   def test_cannot_find_path_if_completely_blocked
     stage = Stage.new(0..5, 0..5)
     position = Vector[1, 3]
-    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     simulation.add_obstacle_at(Vector[0, 2])
     simulation.add_obstacle_at(Vector[1, 2])
@@ -212,7 +212,7 @@ class TestSimulation < Minitest::Test
   def test_ignore_off_table_destination
     stage = Stage.new(0..5, 0..5)
     position = Vector[3, 3]
-    robot = Robot.new(position: position, direction: NORTH_VECTOR)
+    robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
     path = simulation.robot_path_to(Vector[9, 8])
     assert path.empty?

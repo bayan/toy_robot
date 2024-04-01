@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "matrix"
-require_relative "table_direction"
+require 'matrix'
+require_relative 'table_direction'
 
 module ToyRobot
   class Robot

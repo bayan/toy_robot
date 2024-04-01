@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "base"
+require_relative 'base'
 
 module ToyRobot
   module Command
@@ -9,9 +9,9 @@ module ToyRobot
 
       def self.execute(simulation, *arguments)
         robot = simulation.robot
-        if robot.on_table?
-          puts "Output: #{robot.position.to_a.join(",")},#{robot.direction_label}"
-        end
+        return unless robot.on_table?
+
+        puts "Output: #{robot.position.to_a.join(',')},#{robot.direction_label}"
       end
     end
   end

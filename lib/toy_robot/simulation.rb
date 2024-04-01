@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "matrix"
-require "set"
-require_relative "commands/place"
-require_relative "commands/move"
-require_relative "commands/left"
-require_relative "commands/right"
-require_relative "commands/report"
-require_relative "commands/find_path"
+require 'matrix'
+require 'set'
+require_relative 'commands/place'
+require_relative 'commands/move'
+require_relative 'commands/left'
+require_relative 'commands/right'
+require_relative 'commands/report'
+require_relative 'commands/find_path'
 
 module ToyRobot
   class Simulation
@@ -31,9 +31,9 @@ module ToyRobot
     end
 
     def add_obstacle_at(position)
-      if stage.valid_position?(position) && robot.position != position
-        obstacles.add(position)
-      end
+      return unless stage.valid_position?(position) && robot.position != position
+
+      obstacles.add(position)
     end
 
     def position_vacant?(position)
@@ -47,6 +47,7 @@ module ToyRobot
     def robot_path_to(position)
       return [] if !robot.on_table? || !position_valid_and_vacant?(position)
       return [position] if robot.position == position
+
       paths = [[robot.position]]
       until paths.empty?
         next_paths = []
@@ -56,6 +57,7 @@ module ToyRobot
             new_path = path + [adjacent]
             return new_path if adjacent == position
             next if path.include?(adjacent) || !position_valid_and_vacant?(adjacent)
+
             next_paths.append(new_path)
           end
         end

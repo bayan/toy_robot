@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "base"
+require_relative 'base'
 
 module ToyRobot
   module Command
@@ -11,10 +11,10 @@ module ToyRobot
         position, direction = arguments
         stage = simulation.stage
         robot = simulation.robot
-        if simulation.position_valid_and_vacant?(position) && stage.valid_direction?(direction)
-          robot.move_to(position)
-          robot.face_direction(direction)
-        end
+        return unless simulation.position_valid_and_vacant?(position) && stage.valid_direction?(direction)
+
+        robot.move_to(position)
+        robot.face_direction(direction)
       end
 
       class << self

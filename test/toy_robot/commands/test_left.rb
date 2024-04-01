@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class TestCommandsLeft < Minitest::Test
   include TableDirection::Constants
@@ -93,17 +93,17 @@ class TestCommandsLeft < Minitest::Test
   end
 
   def test_matches_valid_command_string
-    assert Command::Left.valid_format?("LEFT")
+    assert Command::Left.valid_format?('LEFT')
   end
 
   def test_does_not_match_invalid_command_string
-    refute Command::Left.valid_format?("LEFT TURN")
-    refute Command::Left.valid_format?("left")
-    refute Command::Left.valid_format?("Go LEFT")
-    refute Command::Left.valid_format?("L")
-    refute Command::Left.valid_format?("PLACE 123,654,NORTH")
-    refute Command::Left.valid_format?("REPORT")
-    refute Command::Left.valid_format?("RIGHT")
+    refute Command::Left.valid_format?('LEFT TURN')
+    refute Command::Left.valid_format?('left')
+    refute Command::Left.valid_format?('Go LEFT')
+    refute Command::Left.valid_format?('L')
+    refute Command::Left.valid_format?('PLACE 123,654,NORTH')
+    refute Command::Left.valid_format?('REPORT')
+    refute Command::Left.valid_format?('RIGHT')
   end
 
   def test_executes_valid_command_string
@@ -111,7 +111,7 @@ class TestCommandsLeft < Minitest::Test
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
-    Command::Left.parse_and_execute(simulation, "LEFT")
+    Command::Left.parse_and_execute(simulation, 'LEFT')
     assert_equal robot.position, Vector[3, 3]
     assert_equal robot.direction, WEST_VECTOR
   end
@@ -121,7 +121,7 @@ class TestCommandsLeft < Minitest::Test
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
-    Command::Left.parse_and_execute(simulation, "leeeefffftttt!")
+    Command::Left.parse_and_execute(simulation, 'leeeefffftttt!')
     assert_equal robot.position, Vector[3, 3]
     assert_equal robot.direction, NORTH_VECTOR
   end

@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class TestCommandsBase < Minitest::Test
   def test_execute_is_an_abstract_method

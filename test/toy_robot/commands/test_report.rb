@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class TestCommandsReport < Minitest::Test
   include TableDirection::Constants
@@ -9,7 +9,7 @@ class TestCommandsReport < Minitest::Test
     refute robot.on_table?
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
-    assert_output("") do
+    assert_output('') do
       Command::Report.execute(simulation)
     end
   end
@@ -25,17 +25,17 @@ class TestCommandsReport < Minitest::Test
   end
 
   def test_matches_valid_command_string
-    assert Command::Report.valid_format?("REPORT")
+    assert Command::Report.valid_format?('REPORT')
   end
 
   def test_does_not_match_invalid_command_string
-    refute Command::Report.valid_format?("report")
-    refute Command::Report.valid_format?("R")
-    refute Command::Report.valid_format?("REpoRT")
-    refute Command::Report.valid_format?("PLACE 123,654,NORTH")
-    refute Command::Report.valid_format?("MOVE")
-    refute Command::Report.valid_format?("LEFT")
-    refute Command::Report.valid_format?("RIGHT")
+    refute Command::Report.valid_format?('report')
+    refute Command::Report.valid_format?('R')
+    refute Command::Report.valid_format?('REpoRT')
+    refute Command::Report.valid_format?('PLACE 123,654,NORTH')
+    refute Command::Report.valid_format?('MOVE')
+    refute Command::Report.valid_format?('LEFT')
+    refute Command::Report.valid_format?('RIGHT')
   end
 
   def test_executes_valid_command_string
@@ -44,7 +44,7 @@ class TestCommandsReport < Minitest::Test
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
     assert_output("Output: 3,3,NORTH\n") do
-      Command::Report.parse_and_execute(simulation, "REPORT")
+      Command::Report.parse_and_execute(simulation, 'REPORT')
     end
   end
 
@@ -53,8 +53,8 @@ class TestCommandsReport < Minitest::Test
     robot = Robot.new(position: Vector[3, 3], direction: NORTH_VECTOR)
     obstacles = []
     simulation = Simulation.new(stage, robot, obstacles)
-    assert_output("") do
-      Command::Report.parse_and_execute(simulation, "RIPOURT")
+    assert_output('') do
+      Command::Report.parse_and_execute(simulation, 'RIPOURT')
     end
   end
 end

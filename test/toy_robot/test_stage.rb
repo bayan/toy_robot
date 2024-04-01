@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require 'test_helper'
 
 class TestStage < Minitest::Test
   def test_is_immutable
@@ -51,7 +51,7 @@ class TestStage < Minitest::Test
     range = -80..-2
     stage = Stage.new(range)
     assert_equal stage.dimension_ranges[0], range
-    assert stage.dimension_ranges[0].all? { |i| i < 0 }
+    assert(stage.dimension_ranges[0].all? { |i| i < 0 })
   end
 
   def test_can_have_range_of_positive_and_negative_numbers
