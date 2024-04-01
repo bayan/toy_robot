@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'matrix'
-require_relative '../table_direction'
+require "matrix"
+require_relative "../table_direction"
 
 module ToyRobot
   module Command
@@ -15,7 +15,7 @@ module ToyRobot
       end
 
       def self.execute(simulation, *arguments)
-        raise NotImplementedError, 'Abstract method Base.execute called.'
+        raise NotImplementedError, "Abstract method Base.execute called."
       end
 
       def self.parse_and_execute(simulation, command_string)

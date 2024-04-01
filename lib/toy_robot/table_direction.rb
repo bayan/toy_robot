@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'matrix'
+require "matrix"
 
 module ToyRobot
   module TableDirection
     module Constants
-      NORTH = 'NORTH'
-      EAST = 'EAST'
-      SOUTH = 'SOUTH'
-      WEST = 'WEST'
+      NORTH = "NORTH"
+      EAST = "EAST"
+      SOUTH = "SOUTH"
+      WEST = "WEST"
 
       NORTH_VECTOR = Vector[0, 1].freeze
       EAST_VECTOR = Vector[1, 0].freeze

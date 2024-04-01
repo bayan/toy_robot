@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class TestFindPath < Minitest::Test
   include TableDirection::Constants
@@ -8,7 +10,7 @@ class TestFindPath < Minitest::Test
     robot = Robot.new
     refute robot.on_table?
     simulation = Simulation.new(stage, robot)
-    assert_output('') do
+    assert_output("") do
       Command::FindPath.execute(simulation, Vector[1, 2])
     end
   end
@@ -56,7 +58,7 @@ class TestFindPath < Minitest::Test
     simulation.add_obstacle_at(Vector[2, 3])
     simulation.add_obstacle_at(Vector[2, 4])
     simulation.add_obstacle_at(Vector[2, 5])
-    assert_output('') do
+    assert_output("") do
       Command::FindPath.execute(simulation, Vector[3, 1])
     end
   end
@@ -66,7 +68,7 @@ class TestFindPath < Minitest::Test
     position = Vector[3, 3]
     robot = Robot.new(position:, direction: NORTH_VECTOR)
     simulation = Simulation.new(stage, robot)
-    assert_output('') do
+    assert_output("") do
       Command::FindPath.execute(simulation, Vector[9, 8])
     end
   end

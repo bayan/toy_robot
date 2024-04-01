@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class TestRobot < Minitest::Test
   def test_robot_starts_off_the_table
